@@ -16,7 +16,7 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 public class MainActivity extends AppCompatActivity {
 
-mySQLHelper dbHelper =new mySQLHelper(this);
+mySQLHelper dbHelper;
     ImageButton imageView;
     EditText nama;
     EditText nim;
@@ -28,6 +28,14 @@ mySQLHelper dbHelper =new mySQLHelper(this);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+         dbHelper=new mySQLHelper(this);
+        nama = (EditText) this.findViewById(R.id.nama);
+        nim = (EditText) this.findViewById(R.id.nim);
+        jurusan = (EditText) this.findViewById(R.id.jurusan);
+        jk1 = (RadioButton) this.findViewById(R.id.jk1);
+        foto = (ImageButton) this.findViewById(R.id.foto);
+
+
 
 
         ImageButton btnCamera = (ImageButton) findViewById(R.id.foto);
@@ -44,13 +52,15 @@ mySQLHelper dbHelper =new mySQLHelper(this);
     tombol.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            addData(nim.getText().toString(), nama.getText().toString(), jurusan.getText().toString(), jk1.getText().toString());
+            Intent intent = new Intent(getApplicationContext(), Tampillist.class);
+            startActivity(intent);
         }
     });}
-    private void addData(String num, String name) {
+    private void addData(String nim1, String nama1, String jurusan1, String jk11) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         try {
-            db.execSQL("insert into " + mySQLHelper.TABLE + " values(null,'" + nim + "','" + nama + "','" + foto+"','" + jurusan + "','" + jk1);
+            db.execSQL("insert into " + mySQLHelper.TABLE + " values(null,'" + nim1 + "','" + nama1 + "','" + jurusan1 + "','" + jk11+ "');");
         } catch (Exception e) {
             nama.setText(e.toString());
         }

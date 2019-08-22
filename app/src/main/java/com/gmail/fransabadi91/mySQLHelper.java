@@ -28,7 +28,7 @@ public class mySQLHelper  extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "create table " + TABLE + "( _id"+ " integer primary key autoincrement, " + nim + " text not null, "
-                + nama + " text not null,  " + foto + "text not nul"  +jurusan +"text not null, " + jk1 + "text not null);";
+                + nama + " text not null,  "+jurusan +"text not null, " + jk1 + "text not null);";
         Log.d("Data", "onCreate: " + sql);
         db.execSQL(sql);
     }
